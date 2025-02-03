@@ -1,0 +1,104 @@
+# Rock-Papper-Scissors
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .game-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .choices {
+            margin: 20px 0;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .rock { background-color: #ff6961; color: white; }
+        .paper { background-color: #77dd77; color: white; }
+        .scissor { background-color: #fdfd96; color: black; }
+
+        .result {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rock Paper Scissors Game</h1>
+    
+    <div class="game-container">
+        <h2>Choose Your Move:</h2>
+        <div class="choices">
+            <button class="rock" onclick="playGame('rock')">✊ Rock</button>
+            <button class="paper" onclick="playGame('paper')">✋ Paper</button>
+            <button class="scissor" onclick="playGame('scissor')">✌️ Scissors</button>
+        </div>
+        
+        <p><strong>Player Choice:</strong> <span id="playerChoice">-</span></p>
+        <p><strong>Computer Choice:</strong> <span id="computerChoice">-</span></p>
+        <p class="result" id="result">Let's Play!</p>
+    </div>
+
+    <script>
+        function computerChoice() {
+            const choices = ['rock', 'paper', 'scissor'];
+            const randomIndex = Math.floor(Math.random() * 3);
+            return choices[randomIndex];
+        }
+
+        function determineWinner(playerChoice, computerSel) {
+            if (playerChoice === computerSel) {
+                return "Match is a Draw!";
+            }
+
+            if (
+                (playerChoice === 'rock' && computerSel === 'scissor') ||
+                (playerChoice === 'scissor' && computerSel === 'paper') ||
+                (playerChoice === 'paper' && computerSel === 'rock')
+            ) {
+                return "🎉 You WIN!";
+            } else {
+                return "😞 You LOST!";
+            }
+        }
+
+        function playGame(playerChoice) {
+            const computerSel = computerChoice();
+            document.getElementById("playerChoice").textContent = playerChoice;
+            document.getElementById("computerChoice").textContent = computerSel;
+            
+            const result = determineWinner(playerChoice, computerSel);
+            document.getElementById("result").textContent = result;
+        }
+    </script>
+
+</body>
+</html>
